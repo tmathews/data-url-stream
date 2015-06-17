@@ -1,6 +1,7 @@
 var streamifier = require('streamifier')
 
 module.exports = function dataUrlStream (url) {
+  if (!url || typeof url != 'string') throw Error('Invalid url provided.')
   var matches = url.match(/^[^,]*,(.*)/) || []
   var buffer = new Buffer(matches[1] || '', 'base64')
   return streamifier.createReadStream(buffer)
